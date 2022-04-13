@@ -10,6 +10,7 @@ class EndPoints {
 
         //COVERT URL
         const val  CONVERT_URL = "latest"
+        const val SYMBOL="symbols"
 
     }
 }

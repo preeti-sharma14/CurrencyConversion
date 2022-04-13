@@ -17,12 +17,17 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import android.widget.ArrayAdapter
+import com.assignment.currencyConversion.main.model.CurrencyListResponse
+
 
 @AndroidEntryPoint
 class ConversionActivity : AppCompatActivity() {
     private var viewBinding: ActivityConversionBinding? = null
     private val binding get() = viewBinding!!
-
+    val spinner1 = viewBinding?.spnFirstCountry
+    val spinner2 = viewBinding?.spnSecondCountry
     private var selectedItem1: String? = "EGP"
     private var selectedItem2: String? = "INR"
 
@@ -35,21 +40,25 @@ class ConversionActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         initSpinner()
+        conversionViewModel.conversionList.observe(this){
+
+        }
         setUpClickListener()
     }
 
     private fun initSpinner() {
-        val spinner1 = viewBinding?.spnFirstCountry
+
         spinner1?.setItems(getAllCountries())
         spinner1?.setOnClickListener {
             Utility.hideKeyboard(this)
         }
         spinner1?.setOnItemSelectedListener { view, position, id, item ->
             val countryCode = getCountryCode(item.toString())
-            val currencySymbol = getSymbol(countryCode)
-            selectedItem1 = currencySymbol
-            viewBinding?.txtFirstCurrencyName?.setText(selectedItem1)
+           // val currencySymbol = getSymbol(countryCode)
+            //selectedItem1 = currencySymbol
+            //viewBinding?.txtFirstCurrencyName?.setText(selectedItem1)
         }
+
         val spinner2 = viewBinding?.spnSecondCountry
         spinner2?.setOnClickListener {
             Utility.hideKeyboard(this)
@@ -57,22 +66,35 @@ class ConversionActivity : AppCompatActivity() {
         spinner2?.setItems(getAllCountries())
         spinner2?.setOnItemSelectedListener { view, position, id, item ->
             val countryCode = getCountryCode(item.toString())
-            val currencySymbol = getSymbol(countryCode)
-            selectedItem2 = currencySymbol
-            viewBinding?.txtSecondCurrencyName?.setText(selectedItem2)
+            val currencySymbol = getSymbol()
+           // selectedItem2 = currencySymbol
+            //viewBinding?.txtSecondCurrencyName?.setText(selectedItem2)
         }
     }
 
     private fun getCountryCode(countryName: String) =
         Locale.getISOCountries().find { Locale("", it).displayCountry == countryName }
 
-    private fun getSymbol(countryCode: String?): String? {
-        val availableLocales = Locale.getAvailableLocales()
-        for (i in availableLocales.indices) {
-            if (availableLocales[i].country == countryCode
-            ) return Currency.getInstance(availableLocales[i]).currencyCode
-        }
-        return ""
+    private fun getSymbol() {
+        //hide keyboard
+        Utility.hideKeyboard(this)
+
+        //make progress bar visible
+        binding.prgLoading.visibility = View.VISIBLE
+
+        //make button invisible
+        binding.btnConvert.visibility = View.GONE
+
+        //Get the data inputed
+        val apiKey = EndPoints.API_KEY
+        val adapter = ArrayAdapter<Resource<CurrencyListResponse>>(
+            this,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.add(conversionViewModel.getConversionList(apiKey))
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner1?.setAdapter(adapter)
+
     }
 
     private fun getAllCountries(): ArrayList<String> {
@@ -147,7 +169,7 @@ class ConversionActivity : AppCompatActivity() {
         val apiKey = EndPoints.API_KEY
 
         //do the conversion
-        conversionViewModel.getConvertedData(apiKey)
+        conversionViewModel.getConversionList(apiKey)
 
         //observe for changes in UI
         observeUi()
@@ -168,7 +190,6 @@ class ConversionActivity : AppCompatActivity() {
                     if (result.data?.success == true) {
 
                         val map: Map<String, Rates> = result.data.rates!!
-
                         map.keys.forEach {
 
                             val rateForAmount = map[it]?.rate_for_amount

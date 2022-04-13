@@ -13,6 +13,7 @@
         android:name=".main.di.CurrencyConversionApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_secutiry_config"
         android:theme="@style/Theme.CurrencyConversion">
         <activity
             android:name=".main.presentation.view.ConversionActivity"

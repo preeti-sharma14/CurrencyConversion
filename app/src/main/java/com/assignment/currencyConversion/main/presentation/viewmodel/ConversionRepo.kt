@@ -2,6 +2,7 @@ package com.assignment.currencyConversion.main.presentation.viewmodel
 
 import com.assignment.currencyConversion.main.helper.Resource
 import com.assignment.currencyConversion.main.model.ApiResponse
+import com.assignment.currencyConversion.main.model.CurrencyListResponse
 import com.assignment.currencyConversion.main.network.ApiDataSource
 import com.assignment.currencyConversion.main.network.BaseDataSource
 import kotlinx.coroutines.Dispatchers
@@ -18,4 +19,11 @@ class ConversionRepo @Inject constructor(private val apiDataSource: ApiDataSourc
             emit(safeApiCall { apiDataSource.getConvertedRate(access_key) })
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun getConversionList(access_key: String): Flow<Resource<CurrencyListResponse>> {
+        return flow {
+            emit(safeApiCall { apiDataSource.getConversionList(access_key) })
+        }.flowOn(Dispatchers.IO)
+    }
+
 }
