@@ -1,12 +1,10 @@
-package com.assignment.currencyConversion.main.network
+package com.assignment.currencyConversion.main.data.network
 
-import com.assignment.currencyConversion.main.helper.EndPoints
-import com.assignment.currencyConversion.main.model.ApiResponse
-import com.assignment.currencyConversion.main.model.CurrencyListResponse
+import com.assignment.currencyConversion.main.domain.helper.EndPoints
+import com.assignment.currencyConversion.main.domain.model.ApiResponse
+import com.assignment.currencyConversion.main.domain.model.CurrencyListResponse
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.PUT
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {

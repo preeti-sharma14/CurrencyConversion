@@ -1,13 +1,12 @@
 package com.assignment.currencyConversion.main.presentation.viewmodel
 
-import com.assignment.currencyConversion.main.helper.Resource
-import com.assignment.currencyConversion.main.model.ApiResponse
-import com.assignment.currencyConversion.main.model.CurrencyListResponse
-import com.assignment.currencyConversion.main.network.ApiDataSource
-import com.assignment.currencyConversion.main.network.BaseDataSource
+import com.assignment.currencyConversion.main.domain.helper.Resource
+import com.assignment.currencyConversion.main.domain.model.ApiResponse
+import com.assignment.currencyConversion.main.domain.model.CurrencyListResponse
+import com.assignment.currencyConversion.main.data.network.ApiDataSource
+import com.assignment.currencyConversion.main.data.network.BaseDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject

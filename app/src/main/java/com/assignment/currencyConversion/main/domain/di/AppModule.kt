@@ -1,8 +1,10 @@
-package com.assignment.currencyConversion.main.di
+package com.assignment.currencyConversion.main.domain.di
 
-import com.assignment.currencyConversion.main.helper.EndPoints
-import com.assignment.currencyConversion.main.network.ApiDataSource
-import com.assignment.currencyConversion.main.network.ApiService
+import android.app.Application
+import android.content.Context
+import com.assignment.currencyConversion.main.domain.helper.EndPoints
+import com.assignment.currencyConversion.main.data.network.ApiDataSource
+import com.assignment.currencyConversion.main.data.network.ApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -22,6 +24,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
+    private val READ_TIMEOUT=30L
+    private val WRITE_TIMEOUT=30L
     //API Base Url
     @Provides
     fun providesBaseUrl() = EndPoints.BASE_URL
@@ -40,8 +44,8 @@ class AppModule {
                 val logging = HttpLoggingInterceptor()
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY)
                 client.addInterceptor(logging)
-                client.connectTimeout(120, TimeUnit.SECONDS)
-                client.readTimeout(120, TimeUnit.SECONDS)
+                client.connectTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                client.readTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 client.protocols(Collections.singletonList(Protocol.HTTP_1_1))
 
         }.build()
@@ -59,4 +63,10 @@ class AppModule {
     @Singleton
     fun provideApiDatSource(apiService: ApiService) = ApiDataSource(apiService)
 
+    @Provides
+    @Singleton
+    fun provideContext(application: Application): Context?
+    {
+        return application.applicationContext
+    }
 }

@@ -1,7 +1,7 @@
-package com.assignment.currencyConversion.main.network
+package com.assignment.currencyConversion.main.data.network
 
 import android.util.Log
-import com.assignment.currencyConversion.main.helper.Resource
+import com.assignment.currencyConversion.main.domain.helper.Resource
 import retrofit2.Response
 
 abstract class BaseDataSource {

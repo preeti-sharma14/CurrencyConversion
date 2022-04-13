@@ -1,4 +1,4 @@
-package com.assignment.currencyConversion.main.model
+package com.assignment.currencyConversion.main.domain.model
 
 data class Rates(
     val currency_name: String,

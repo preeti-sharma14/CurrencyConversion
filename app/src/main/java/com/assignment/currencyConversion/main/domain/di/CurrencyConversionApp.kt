@@ -1,7 +1,6 @@
-package com.assignment.currencyConversion.main.di
+package com.assignment.currencyConversion.main.domain.di
 
 import android.app.Application
-import android.content.res.Configuration
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import dagger.hilt.android.HiltAndroidApp

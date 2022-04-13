@@ -1,6 +1,5 @@
-package com.assignment.currencyConversion.main.network
+package com.assignment.currencyConversion.main.data.network
 
-import com.assignment.currencyConversion.main.helper.EndPoints
 import javax.inject.Inject
 
 class ApiDataSource @Inject constructor(private val apiService: ApiService) {

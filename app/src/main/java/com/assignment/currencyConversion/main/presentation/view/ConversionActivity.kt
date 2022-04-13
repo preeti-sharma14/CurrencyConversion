@@ -8,18 +8,17 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.assignment.currencyConversion.R
 import com.assignment.currencyConversion.databinding.ActivityConversionBinding
-import com.assignment.currencyConversion.main.helper.EndPoints
-import com.assignment.currencyConversion.main.helper.Resource
-import com.assignment.currencyConversion.main.helper.Utility
-import com.assignment.currencyConversion.main.model.Rates
+import com.assignment.currencyConversion.main.domain.helper.EndPoints
+import com.assignment.currencyConversion.main.domain.helper.Resource
+import com.assignment.currencyConversion.main.Utils.Utility
+import com.assignment.currencyConversion.main.domain.model.Rates
 import com.assignment.currencyConversion.main.presentation.viewmodel.ConversionListViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import android.widget.ArrayAdapter
-import com.assignment.currencyConversion.main.model.CurrencyListResponse
+import com.assignment.currencyConversion.main.domain.model.CurrencyListResponse
 
 
 @AndroidEntryPoint

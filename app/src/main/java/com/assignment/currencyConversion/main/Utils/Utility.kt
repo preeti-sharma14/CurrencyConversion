@@ -1,8 +1,7 @@
-package com.assignment.currencyConversion.main.helper
+package com.assignment.currencyConversion.main.Utils
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build

@@ -1,4 +1,4 @@
-package com.assignment.currencyConversion.main.helper
+package com.assignment.currencyConversion.main.domain.helper
 
 import android.util.Log
 import androidx.annotation.MainThread
